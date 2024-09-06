@@ -1,0 +1,28 @@
+.filler {
+    flex: 1 1 auto;
+  }
+  
+  mat-toolbar{
+    background-color: black;
+    color: white;
+    position: relative;
+    z-index: 999;
+  }
+  
+  .mat-card-avatar{
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .user-name{
+    margin-right: 10px;
+    font-size: initial;
+  }
+  
+  .header-logo{
+    vertical-align: middle;
+    width: 140px;
+  }
+  

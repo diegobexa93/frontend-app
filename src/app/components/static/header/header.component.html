@@ -1,0 +1,14 @@
+<mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>APP</span>
+    <span class="filler"></span>
+    <mat-menu #menu="matMenu">
+      <button  mat-menu-item  (click)="this.logOut()">
+        <mat-icon>logout</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-menu>
+</mat-toolbar>
+  

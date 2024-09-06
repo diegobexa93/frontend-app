@@ -1,0 +1,19 @@
+<div class="overlay" *ngIf="this.isVisible()">
+    <div class="center">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </div>
+  <div class="example-container">
+    <mat-sidenav-container
+      class="example-sidenav-container"
+      [style.marginTop.px]="64"
+    >
+      <mat-sidenav #sidenav mode="side" fixedTopGap="56" [opened]="isLoggedIn()">
+        <app-leftmenu></app-leftmenu>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
