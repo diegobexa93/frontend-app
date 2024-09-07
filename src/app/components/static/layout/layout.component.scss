@@ -1,0 +1,12 @@
+.layout {
+    display: flex;
+  }
+  
+  app-left-menu {
+    width: 250px; /* Width for the left menu */
+  }
+  
+  app-body {
+    flex-grow: 1; /* Take the remaining space */
+  }
+  
