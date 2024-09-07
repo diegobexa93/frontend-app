@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule as MatChipsModule } from '@angular/material/chips'; 
 import { AngularMaterialModule } from './shared/components/angular-material.module';
+import {provideHttpClient} from '@angular/common/http';
 
 import { HeaderComponent } from './components/static/header/header.component';
 import { BodyComponent } from './components/static/body/body.component';
@@ -32,6 +33,9 @@ import { AppComponent } from './app.component';
 
   ],
   providers: [
+    provideHttpClient()
+  ],
+  bootstrap:[
     AppComponent
   ]
 })
