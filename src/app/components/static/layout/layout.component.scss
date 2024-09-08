@@ -1,12 +1,25 @@
-.layout {
-    display: flex;
+mat-sidenav-container {
+  height: 100vh;
+}
+
+mat-sidenav {
+  width: 250px;
+  background: #fafafa; // Optional background color for the sidenav
+}
+
+.main-content {
+  padding: 20px;
+  margin-top: 64px; // Height of the toolbar
+  overflow-y: auto; // Allow scrolling if content is too tall
+}
+
+@media (max-width: 600px) {
+  mat-sidenav {
+    width: 200px; // Smaller sidenav on small screens
   }
-  
-  app-left-menu {
-    width: 250px; /* Width for the left menu */
+
+  .main-content {
+    padding: 10px; // Reduce padding on small screens
+    margin-top: 56px; // Adjust margin for smaller toolbar
   }
-  
-  app-body {
-    flex-grow: 1; /* Take the remaining space */
-  }
-  
+}
