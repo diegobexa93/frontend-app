@@ -1,9 +1,24 @@
-mat-nav-list {
-  background-color: #ffffff; // Background for the menu
+.mat-expansion-panel {
+  box-shadow: none;
+  background: transparent;
+}
 
-  a {
-    &:hover {
-      background-color: #e0e0e0; // Change background on hover
-    }
-  }
+.mat-expansion-panel-header {
+  padding: 0 16px;
+}
+
+.mat-expansion-panel-header-title {
+  align-items: center;
+}
+
+.mat-expansion-panel-header-title .mat-icon {
+  margin-right: 16px;
+}
+
+.mat-nav-list .mat-list-item {
+  font-size: 14px;
+}
+
+.mat-nav-list .mat-list-item .mat-icon {
+  font-size: 20px;
 }

@@ -1,25 +1,30 @@
-mat-sidenav-container {
+.app-container {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-mat-sidenav {
+mat-sidenav-container {
+  flex: 1;
+}
+
+.app-sidenav {
   width: 250px;
-  background: #fafafa; // Optional background color for the sidenav
+  background-color: #f0f0f0;
+  border-right: none;
 }
 
 .main-content {
   padding: 20px;
-  margin-top: 64px; // Height of the toolbar
-  overflow-y: auto; // Allow scrolling if content is too tall
+  background-color: #f9f9f9;
 }
 
-@media (max-width: 600px) {
-  mat-sidenav {
-    width: 200px; // Smaller sidenav on small screens
+@media (max-width: 599px) {
+  .app-sidenav {
+    width: 100%;
   }
 
   .main-content {
-    padding: 10px; // Reduce padding on small screens
-    margin-top: 56px; // Adjust margin for smaller toolbar
+    padding: 10px;
   }
 }

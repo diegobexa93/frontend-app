@@ -1,27 +1,18 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../auth/services/auth.service';
-import { SidenavService } from '../../../shared/services/sidenav.service';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent  {
+export class HeaderComponent {
+  @Output() sidenavToggle = new EventEmitter<void>();
 
-
-  constructor(
-    private sideNav: SidenavService,
-    private authService: AuthService,
-
-    
-  ) { }
-
-  toggleSidenav(){
-    this.sideNav.toggle();
+  toggleSidenav() {
+    this.sidenavToggle.emit();
   }
 
-  logOut(){
-    this.authService.logout();
+  logOut() {
+    // Implement logout logic
   }
 }

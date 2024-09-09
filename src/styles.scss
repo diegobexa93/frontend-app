@@ -1,21 +1,23 @@
 
 @use '@angular/material' as mat;
 
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body { height: 100%; }
-body { margin: 0;}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-  *::-webkit-scrollbar{
-  width:5px;
-  margin-left:2px;
+.mat-drawer-side {
+  border-right: none;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+@media (max-width: 599px) {
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: 56px;
   }
-
-  *::-webkit-scrollbar-thumb{
-  height:10px;
-  background-color:#A7A8A9;
-  }
-
-  .mat-drawer-inner-container{
-  overflow:visible!important;
-  }
-
+}

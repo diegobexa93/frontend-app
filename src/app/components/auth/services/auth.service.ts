@@ -10,15 +10,20 @@ import { AlertService } from '../../../shared/services/alert.service';
 })
 export class AuthService {
 
+  private currentUser: string | null = null;
+
   constructor(private http: HttpClient,
               private alertService: AlertService) {}
 
   login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string, refreshToken: string }>(`${environment.apiUri}/v1/Authenticate/Login`, { Login: email, Password: password }).pipe(
+    return this.http.post<{ token: string, refreshToken: string, name: string }>(`${environment.apiUri}/v1/Authenticate/Login`, { Login: email, Password: password }).pipe(
       map(response => {
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('authRefreshToken', response.refreshToken);
+        this.currentUser = response.name;
+
         return true;
+
       }),
       catchError((error: HttpErrorResponse) => {
         console.error('Login error: ', error); // Log the error
@@ -46,6 +51,10 @@ export class AuthService {
   {
     let token = localStorage.getItem('authRefreshToken');
     return token;
+  }
+
+  getUsername(): string | null {
+    return this.currentUser;
   }
 
 }

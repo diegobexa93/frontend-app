@@ -1,16 +1,16 @@
-<mat-toolbar class="mat-elevation-z8">
-  <button mat-icon-button (click)="toggleSidenav()">
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
     <mat-icon>menu</mat-icon>
   </button>
   <span>APP</span>
-  <span class="filler"></span>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User menu">
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="logOut()">
-      <mat-icon>logout</mat-icon>
-      <span>Sair</span>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Log Out</span>
     </button>
   </mat-menu>
 </mat-toolbar>

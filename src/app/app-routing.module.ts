@@ -13,12 +13,14 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard], // Protect routes under LayoutComponent
     children: [
-      { path: 'home', component: HomeComponent },
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
       // More routes can be added here
     ],
   },
-  { path: '**', redirectTo: '/login' } // Redirect unknown paths to login
+  { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirect root URL to /home
+  { path: '**', redirectTo: 'login' } // Redirect unknown paths to login
 ];
 
 @NgModule({
