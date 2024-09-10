@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/guards/auth.guard';
-
-import { LoginComponent } from './components/auth/login/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { LoginComponent } from './components/auth/login/login.component';
 import { LayoutComponent } from './components/static/layout/layout.component';
-
+import { AuthGuard } from './core/guards/auth.guard';
+import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: '',
-    component: LayoutComponent,
-    canActivate: [AuthGuard], // Protect routes under LayoutComponent
+    component: LayoutComponent, // LayoutComponent wrapping both home and user routes
+    canActivate: [AuthGuard],
     children: [
-      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-      // More routes can be added here
-    ],
+      { path: 'home', component: HomeComponent },
+      { path: 'user', component: UserComponent } // Route for UserComponent
+    ]
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirect root URL to /home
-  { path: '**', redirectTo: 'login' } // Redirect unknown paths to login
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({

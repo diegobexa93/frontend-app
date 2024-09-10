@@ -19,6 +19,8 @@ import { LeftmenuComponent } from './components/static/leftmenu/leftmenu.compone
 
 import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UserComponent } from './components/user/user.component';
 
 //
 //Interceptors
@@ -29,12 +31,14 @@ import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
+    AppComponent,
     LayoutComponent,
-    LoginComponent,
     HomeComponent,
     HeaderComponent,
     LeftmenuComponent, 
-    AppComponent
+    LoginComponent,
+    NotFoundComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
