@@ -1,4 +1,8 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<div style="padding: 15px;">
+  <p class="h1"><mat-icon class="material-icons">account_circle</mat-icon>&nbsp; Create Users</p>
+  <hr>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div class="row col-12">
     <div class="col-6">
       <mat-form-field appearance="fill"  class="col-12">
@@ -12,8 +16,8 @@
       <div class="col-6">
         <mat-form-field appearance="fill" class="col-12">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="personName" required />
-          <mat-error *ngIf="userForm.get('personName')?.hasError('required')">
+          <input matInput formControlName="personEmail" required />
+          <mat-error *ngIf="userForm.get('personEmail')?.hasError('required')">
             Email is required.
           </mat-error>
         </mat-form-field>
@@ -50,4 +54,4 @@
   </div>
 
   </form>
-  
+</div>

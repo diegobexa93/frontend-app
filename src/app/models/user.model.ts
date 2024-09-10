@@ -1,24 +1,18 @@
-import { Person } from "./person.model";
-
 export interface IUser {
-    guidId: string;
-    password: string;
-    person: Person;
+      personName: string;
+      personEmail: string;
+      userPassword:string;
   }
   
   export class User implements IUser {
-    guidId: string;
-    password: string;
-    person: Person;
+    personName: string;
+    personEmail: string;
+    userPassword:string;
   
-    constructor(guidId: string, password: string, person: Person) {
-      this.guidId = guidId;
-      this.password = password;
-      this.person = person;
-    }
-  
-    validatePassword(): boolean {
-      return this.password.length >= 8;
+    constructor(name: string, email: string, password: string) {
+      this.personName = name;
+      this.personEmail = email;
+      this.userPassword = password;
     }
   }
   

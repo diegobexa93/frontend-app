@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '@env/environment';
-import { AlertService } from '../../../shared/services/alert.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Injectable({
   providedIn: 'root'

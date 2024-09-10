@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUser, User } from '../../models/user.model';
-import { Person } from '../../models/person.model';
 import { ControlsValidatorsService } from '../../shared/services/controls-validators.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -14,12 +14,21 @@ export class UserComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private controlsValidatorsService: ControlsValidatorsService,
+              private userService: UserService
   ) {
     this.userForm = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
       personName: ['', Validators.required],
-      personEmail: ['', Validators.required]
+      personEmail: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+          )
+        ]
+      ]
     });
   }
 
@@ -57,14 +66,15 @@ export class UserComponent implements OnInit {
   onSubmit(): void {
     if (this.userForm.valid) {
       const userData: IUser = {
-        guidId: this.userForm.value.guidId,
-        password: this.userForm.value.password,
-        person: { name: this.userForm.value.personName } as Person // Adjust according to your Person model
+        personName: this.userForm.value.personName,
+        personEmail:this.userForm.value.personEmail,
+        userPassword: this.userForm.value.password 
       };
 
-      const user = new User(userData.guidId, userData.password, userData.person);
-      console.log('User data submitted:', user);
-      // Handle your CRUD operation here (e.g., save to a service)
+      const user = new User(userData.personName, userData.personEmail, userData.userPassword);
+      this.userService.post(user).subscribe(() => {
+        this.userForm.reset();
+            });
     }
   }
 
@@ -90,8 +100,5 @@ export class UserComponent implements OnInit {
   hasError(controlName: string, errorName: string): boolean {
     return this.userForm.controls[controlName].hasError(errorName) && (this.userForm.controls[controlName].touched || this.userForm.controls[controlName].dirty);
   }
-  
-
- 
   
 }

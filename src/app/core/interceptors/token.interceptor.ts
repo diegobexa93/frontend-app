@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '../../components/auth/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,6 +17,8 @@ export class TokenInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('Intercepting request:', request); // Debugging line
+
     if (this.authService.isLoggedIn()) {
       const token = this.authService.getToken();
       if (token !== null) {
