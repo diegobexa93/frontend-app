@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IUser, User } from '../../models/user.model';
+import { IUserCreate, UserCreate, UserList } from '../../models/user.model';
 import { ControlsValidatorsService } from '../../shared/services/controls-validators.service';
 import { UserService } from '../../services/user.service';
 
@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserComponent implements OnInit {
   userForm: FormGroup;
+  dataSource: UserList[] = [];
 
   constructor(private fb: FormBuilder,
               private controlsValidatorsService: ControlsValidatorsService,
@@ -34,6 +35,16 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {     
     this.enablePassword();
+    this.getAll();
+  }
+  
+  getAll()
+  {
+    this.userService.getAll().subscribe(result => 
+    {
+        if(result) 
+          this.dataSource = result;
+    });
   }
 
   passwordConditions = [
@@ -63,19 +74,32 @@ export class UserComponent implements OnInit {
     }
   ];
 
+  hasError(controlName: string, errorName: string): boolean {
+    return this.userForm.controls[controlName].hasError(errorName) && (this.userForm.controls[controlName].touched || this.userForm.controls[controlName].dirty);
+  }
+
   onSubmit(): void {
     if (this.userForm.valid) {
-      const userData: IUser = {
+      const userData: IUserCreate = {
         personName: this.userForm.value.personName,
         personEmail:this.userForm.value.personEmail,
         userPassword: this.userForm.value.password 
       };
 
-      const user = new User(userData.personName, userData.personEmail, userData.userPassword);
+      const user = new UserCreate(userData.personName, userData.personEmail, userData.userPassword);
       this.userService.post(user).subscribe(() => {
         this.userForm.reset();
+        this.getAll();
             });
     }
+  }
+
+  editUser(guidId: string) {
+    // Implement edit logic here
+  }
+
+  deleteUser(guidId: string) {
+    // Implement delete logic here
   }
 
   enablePassword(): void {
@@ -97,8 +121,6 @@ export class UserComponent implements OnInit {
     this.userForm.controls['confirmPassword'].updateValueAndValidity();
   }
 
-  hasError(controlName: string, errorName: string): boolean {
-    return this.userForm.controls[controlName].hasError(errorName) && (this.userForm.controls[controlName].touched || this.userForm.controls[controlName].dirty);
-  }
+  
   
 }

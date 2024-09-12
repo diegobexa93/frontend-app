@@ -55,3 +55,24 @@
 
   </form>
 </div>
+
+<hr>
+
+<div class="bg-light border rounded-3">
+  <div class="row" style="padding: 10px;">
+    <div class="col-2" style="text-align: center;"><strong>Nome</strong></div>
+    <div class="col-2" style="text-align: center;"><strong>Email</strong></div>
+    <div class="col-2" style="text-align: center;"><strong>Created At</strong></div>
+    <div class="col-3" style="text-align: center;"><strong>Action</strong></div>
+  </div>
+
+  <div class="row" style="padding: 5px;" *ngFor="let user of this.dataSource;">
+    <div class="col-2" style="text-align: center;">{{user.personName}}</div>
+    <div class="col-2" style="text-align: center;">{{user.personEmail}}</div>
+    <div class="col-2" style="text-align: center;">{{user.createdAt | date:"dd/MM/yyyy HH:mm:ss"}}</div>
+    <div class="col-3" style="text-align: center;">
+      <button mat-button color="primary" (click)="editUser(user.guidId)">Edit</button>
+      <button mat-button color="warn" (click)="deleteUser(user.guidId)">Delete</button>
+    </div>
+  </div>
+</div>

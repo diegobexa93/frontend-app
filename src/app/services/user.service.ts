@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { AlertService } from '../shared/services/alert.service';
-import { User } from '../models/user.model';
+import { UserCreate, UserList } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +21,9 @@ export class UserService {
   constructor(private http: HttpClient,
               private alertService: AlertService) {}
 
-  post(user: User): Observable<any>
+  post(user: UserCreate): Observable<any>
   {
-    return this.http.post<User>(`${environment.apiUri}/v1/User/CreateUser`, user, this.httpOptions).pipe(
+    return this.http.post<UserCreate>(`${environment.apiUri}/v1/User/CreateUser`, user, this.httpOptions).pipe(
       map((response: any) => { 
         
         this.alertService.showSuccessAlert("User Create Success!", "");
@@ -37,5 +37,10 @@ export class UserService {
       })
     );
   }
+
+  getAll(): Observable<UserList[]> {
+    return this.http.get<UserList[]>(environment.apiUri + "/v1/User/GetAll", this.httpOptions);
+  }
+
 
 }
