@@ -13,16 +13,16 @@ export class TokenInterceptor implements HttpInterceptor {
 
   constructor(
     private authService: AuthService,
-    private snackBar: MatSnackBar // Optional: Inject the notification service
+    private snackBar: MatSnackBar
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Intercepting request:', request); // Debugging line
-
-    if (this.authService.isLoggedIn()) {
+   
       const token = this.authService.getToken();
-      if (token !== null) {
-        request = this.addTokenHeader(request, token);
+
+      if(token && !request.url.includes('/Authenticate/Login')){
+         request = this.addTokenHeader(request, token);
+      }
 
         return next.handle(request).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -36,13 +36,6 @@ export class TokenInterceptor implements HttpInterceptor {
               // Server-side error
               errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
             }
-
-            // Show the error message (Optional: Using Angular Material Snackbar)
-            this.snackBar.open(errorMessage, 'Close', {
-              duration: 5000,
-              verticalPosition: 'top',
-            });
-
             // Log the error message to the console
             console.error(errorMessage);
 
@@ -50,11 +43,6 @@ export class TokenInterceptor implements HttpInterceptor {
             return throwError(() => new Error(errorMessage));
           })
         );
-      }
-    }
-
-    // If not logged in, just proceed with the request as is
-    return next.handle(request);
   }
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {

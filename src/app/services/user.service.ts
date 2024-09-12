@@ -11,15 +11,22 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    }),
+  };
+
   constructor(private http: HttpClient,
               private alertService: AlertService) {}
 
   post(user: User): Observable<any>
   {
-    return this.http.post<User>(`${environment.apiUri}/v1/User/CreateUser`, user).pipe(
+    return this.http.post<User>(`${environment.apiUri}/v1/User/CreateUser`, user, this.httpOptions).pipe(
       map((response: any) => { 
         
-        this.alertService.showSuccessAlert("Create User", "User create!");
+        this.alertService.showSuccessAlert("User Create Success!", "");
         return response;
 
       }),

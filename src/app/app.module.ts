@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, withInterceptorsFromDi  } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule as MatChipsModule } from '@angular/material/chips'; 
 import { AngularMaterialModule } from './shared/components/angular-material.module';
@@ -52,9 +52,8 @@ import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
   providers: [
     AuthService,
     AuthGuard,
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    provideHttpClient(),
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -64,7 +63,8 @@ import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,
       multi: true
-    }
+    },
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap:[
     AppComponent

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../shared/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,12 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          this.errorMessage = 'Invalid email or password';
+          this.alertService.showInfoAlert("Invalid email or password","");
         }
       );
     }
